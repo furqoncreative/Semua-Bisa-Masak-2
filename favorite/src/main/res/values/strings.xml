@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="text_favorite">Favorite</string>
+    <string name="text_no_favorite">There is no favor</string>
+    <string name="button_back">button back</string>
+</resources>

@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Semua Bisa Masak</string>
+
+    <string name="no_data">Empty data</string>
+    <string name="something_wrong">Oops.. something went wrong</string>
+    <string name="text_search_hint">What do you want to cook today?</string>
+    <string name="title_favorite">Favorite</string>
+    <string name="text_ingredients">Ingredients</string>
+    <string name="text_steps">Steps</string>
+    <string name="text_favorite">Favorite</string>
+    <string name="text_top_food">Top Food</string>
+    <string name="text_category">Category</string>
+    <string name="text_no_favorite">There is no favor</string>
+    <string name="text_no_result">not found</string>
+    <string name="text_discover_indonesian_food">Discover Indonesian Food</string>
+
+</resources>

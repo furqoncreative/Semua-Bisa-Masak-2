@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="material_orange_200">#FFCC80</color>
+    <color name="material_orange_500">#FF9800</color>
+    <color name="material_orange_700">#F57C00</color>
+
+    <color name="material_cyan_200">#80DEEA</color>
+    <color name="material_cyan_700">#0097A7</color>
+
+    <color name="black">#FF000000</color>
+    <color name="blue">#130F26</color>
+    <color name="white">#FFFFFFFF</color>
+</resources>
