@@ -4,7 +4,7 @@ orbs:
   android: circleci/android@1.0.3
  
 jobs:
-  build:
+  test-and-build:
     executor:
       name: android/android-machine
     steps:
@@ -36,3 +36,8 @@ jobs:
       - store_artifacts:  
           path: app/build/outputs/apk/debug/
           destination: artifact-file
+
+workflows:
+  made-dicoding: 
+    jobs:
+      - test-and-build
