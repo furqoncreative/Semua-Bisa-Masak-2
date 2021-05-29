@@ -19,9 +19,6 @@ import com.furqoncreative.semuabisamasak.detail.RecipeDetailActivity
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class RecipesBySearchActivity : AppCompatActivity() {
-    companion object {
-        const val EXTRA_DATA = "extra_data"
-    }
 
     private val viewModel: RecipesBySearchViewModel by viewModel()
     private lateinit var binding: ActivityRecipesBySearchBinding
@@ -114,5 +111,9 @@ class RecipesBySearchActivity : AppCompatActivity() {
     override fun onBackPressed() {
         super.onBackPressed()
         finish()
+    }
+
+    companion object {
+        const val EXTRA_DATA = "extra_data"
     }
 }

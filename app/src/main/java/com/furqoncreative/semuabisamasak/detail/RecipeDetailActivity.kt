@@ -13,9 +13,6 @@ import com.furqoncreative.semuabisamasak.databinding.ActivityRecipeDetailBinding
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class RecipeDetailActivity : AppCompatActivity() {
-    companion object {
-        const val EXTRA_DATA = "extra_data"
-    }
 
     private val viewModel: RecipeDetailViewModel by viewModel()
     private lateinit var binding: ActivityRecipeDetailBinding
@@ -107,5 +104,9 @@ class RecipeDetailActivity : AppCompatActivity() {
     override fun onBackPressed() {
         super.onBackPressed()
         finish()
+    }
+
+    companion object {
+        const val EXTRA_DATA = "extra_data"
     }
 }

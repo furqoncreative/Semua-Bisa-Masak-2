@@ -50,7 +50,8 @@
             android:layout_height="36dp"
             android:src="@drawable/ic_back"
             android:theme="@style/Icon"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            android:contentDescription="@string/back_button" />
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
@@ -69,7 +70,8 @@
             android:layout_height="36dp"
             android:layout_gravity="center"
             android:theme="@style/Icon"
-            android:src="@drawable/ic_heart" />
+            android:src="@drawable/ic_heart"
+            android:contentDescription="@string/favorite_button" />
 
     </androidx.cardview.widget.CardView>
 
@@ -104,7 +106,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="300dp"
                     android:scaleType="fitXY"
-                    android:src="@drawable/img_thumb_placeholder" />
+                    android:src="@drawable/img_thumb_placeholder"
+                    android:contentDescription="@string/image_thumbnail" />
             </androidx.cardview.widget.CardView>
 
 

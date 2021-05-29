@@ -1,10 +1,6 @@
 package com.furqoncreative.core.domain.model.recipe
 
-import android.os.Parcelable
-import kotlinx.parcelize.Parcelize
 
-
-@Parcelize
 data class Recipe(
     var key: String? = null,
     var servings: String? = null,
@@ -16,4 +12,4 @@ data class Recipe(
     var dificulty: String? = null,
     var desc: String? = null,
     var isFavorite: Boolean? = null
-) : Parcelable
+)

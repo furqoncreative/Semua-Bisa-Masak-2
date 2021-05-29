@@ -1,6 +1,7 @@
 package com.furqoncreative.core.di
 
 import androidx.room.Room
+import com.furqoncreative.core.BuildConfig
 import com.furqoncreative.core.data.repository.*
 import com.furqoncreative.core.data.source.local.LocalDataSource
 import com.furqoncreative.core.data.source.local.room.RecipesDatabase
@@ -20,6 +21,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
+
 val databaseModule = module {
     factory { get<RecipesDatabase>().recipeDao() }
     factory { get<RecipesDatabase>().recipesByCategoryDao() }
@@ -36,8 +38,14 @@ val databaseModule = module {
 
 val networkModule = module {
     single {
+        val logging = HttpLoggingInterceptor()
+        if (BuildConfig.DEBUG) {
+            logging.setLevel(HttpLoggingInterceptor.Level.BODY)
+        } else {
+            logging.setLevel(HttpLoggingInterceptor.Level.BASIC)
+        }
         OkHttpClient.Builder()
-            .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+            .addInterceptor(logging)
             .connectTimeout(120, TimeUnit.SECONDS)
             .readTimeout(120, TimeUnit.SECONDS)
             .build()

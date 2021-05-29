@@ -17,9 +17,6 @@ import com.furqoncreative.semuabisamasak.detail.RecipeDetailActivity
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class RecipesByCategoryActivity : AppCompatActivity() {
-    companion object {
-        const val EXTRA_DATA = "extra_data"
-    }
 
     private val viewModel: RecipesByCategoryViewModel by viewModel()
     private lateinit var binding: ActivityRecipesByCategoryBinding
@@ -93,4 +90,9 @@ class RecipesByCategoryActivity : AppCompatActivity() {
         super.onBackPressed()
         finish()
     }
+
+    companion object {
+        const val EXTRA_DATA = "extra_data"
+    }
+
 }
