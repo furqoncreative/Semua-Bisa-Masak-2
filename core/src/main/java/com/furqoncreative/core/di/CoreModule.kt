@@ -13,6 +13,8 @@ import com.furqoncreative.core.domain.repository.recipesbycategory.IRecipesByCat
 import com.furqoncreative.core.domain.repository.recipesbysearch.IRecipesBySearchRepository
 import com.furqoncreative.core.domain.repository.recipescategory.IRecipesCategoryRepository
 import com.furqoncreative.core.utils.AppExecutors
+import net.sqlcipher.database.SQLiteDatabase
+import net.sqlcipher.database.SupportFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidContext
@@ -23,6 +25,8 @@ import java.util.concurrent.TimeUnit
 
 
 val databaseModule = module {
+    val passphrase: ByteArray = SQLiteDatabase.getBytes("SemuaBisaMasak".toCharArray())
+    val factory = SupportFactory(passphrase)
     factory { get<RecipesDatabase>().recipeDao() }
     factory { get<RecipesDatabase>().recipesByCategoryDao() }
     factory { get<RecipesDatabase>().recipesCategoryDao() }
@@ -32,7 +36,9 @@ val databaseModule = module {
         Room.databaseBuilder(
             androidContext(),
             RecipesDatabase::class.java, "Recipes.db"
-        ).fallbackToDestructiveMigration().build()
+        ).fallbackToDestructiveMigration()
+            .openHelperFactory(factory)
+            .build()
     }
 }
 
