@@ -4,7 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.SearchView
+import android.view.inputmethod.EditorInfo
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.furqoncreative.core.data.Resource
@@ -35,16 +36,17 @@ class RecipesBySearchActivity : AppCompatActivity() {
         val data = intent.getStringExtra(RecipesByCategoryActivity.EXTRA_DATA)
         setRecipesData(data)
 
-        binding.svSearch.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                setRecipesData(query)
-                return false
-            }
+//        binding.etSearch.setOnEditorActionListener(TextView.OnEditorActionListener { v, actionId, event ->
+//            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+//                setRecipesData(binding.etSearch.text.toString())
+//                return@OnEditorActionListener true
+//            }
+//            false
+//        })
 
-            override fun onQueryTextChange(newText: String?): Boolean {
-                return false
-            }
-        })
+        binding.ivSearch.setOnClickListener {
+            setRecipesData(binding.etSearch.text.toString())
+        }
 
     }
 
@@ -56,7 +58,7 @@ class RecipesBySearchActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        binding.svSearch.setQuery(data, false)
+        binding.etSearch.setText(data)
         data?.let {
             viewModel.recipes(it).observe(this, { recipes ->
                 if (recipes != null) {
@@ -71,8 +73,7 @@ class RecipesBySearchActivity : AppCompatActivity() {
                             if (!result.isNullOrEmpty()) {
                                 recipesAdapter.setData(result)
                             } else {
-                                binding.viewEmpty.tvEmpty.text =
-                                    "$data : ${getString(R.string.text_no_result)}"
+                                binding.viewEmpty.tvEmpty.text = "$data : ${getString(R.string.text_no_result)}"
                                 binding.viewEmpty.root.visibility = View.VISIBLE
                             }
                         }
