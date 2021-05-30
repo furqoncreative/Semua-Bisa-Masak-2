@@ -3,9 +3,7 @@ package com.furqoncreative.semuabisamasak.home
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.furqoncreative.core.data.Resource
@@ -16,6 +14,7 @@ import com.furqoncreative.semuabisamasak.bycategory.RecipesByCategoryActivity
 import com.furqoncreative.semuabisamasak.bysearch.RecipesBySearchActivity
 import com.furqoncreative.semuabisamasak.databinding.ActivityHomeBinding
 import com.furqoncreative.semuabisamasak.detail.RecipeDetailActivity
+import com.furqoncreative.semuabisamasak.utils.fixInputMethod
 import org.koin.android.viewmodel.ext.android.viewModel
 
 
@@ -32,15 +31,6 @@ class HomeActivity : AppCompatActivity() {
         setRecipesData()
         setRecipesCategoryData()
 
-//        binding.etSearch.setOnEditorActionListener(OnEditorActionListener { v, actionId, event ->
-//            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-//                val intent = Intent(this, RecipesBySearchActivity::class.java)
-//                intent.putExtra(RecipesBySearchActivity.EXTRA_DATA, binding.etSearch.text.toString())
-//                startActivity(intent)
-//                return@OnEditorActionListener true
-//            }
-//            false
-//        })
 
         binding.ivSearch.setOnClickListener {
             val intent = Intent(this, RecipesBySearchActivity::class.java)
@@ -75,8 +65,6 @@ class HomeActivity : AppCompatActivity() {
                         binding.viewError.root.visibility = View.VISIBLE
                         binding.viewError.tvError.text =
                             recipes.message ?: getString(R.string.something_wrong)
-                        Log.e("TAG", "setRecipesData: ${recipes.message}")
-
                     }
                 }
             }
@@ -110,8 +98,6 @@ class HomeActivity : AppCompatActivity() {
                         binding.viewError.root.visibility = View.VISIBLE
                         binding.viewError.tvError.text =
                             category.message ?: getString(R.string.something_wrong)
-                        Log.e("TAG", "setRecipesData: ${category.message}")
-
                     }
                 }
             }
@@ -124,4 +110,13 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        fixInputMethod(applicationContext)
+    }
 }

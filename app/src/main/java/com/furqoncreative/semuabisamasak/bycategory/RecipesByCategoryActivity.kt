@@ -2,7 +2,6 @@ package com.furqoncreative.semuabisamasak.bycategory
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,6 +13,7 @@ import com.furqoncreative.core.ui.RecipesAdapter
 import com.furqoncreative.semuabisamasak.R
 import com.furqoncreative.semuabisamasak.databinding.ActivityRecipesByCategoryBinding
 import com.furqoncreative.semuabisamasak.detail.RecipeDetailActivity
+import com.furqoncreative.semuabisamasak.utils.fixInputMethod
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class RecipesByCategoryActivity : AppCompatActivity() {
@@ -59,7 +59,6 @@ class RecipesByCategoryActivity : AppCompatActivity() {
                                 binding.viewError.root.visibility = View.VISIBLE
                                 binding.viewError.tvError.text =
                                     recipes.message ?: getString(R.string.something_wrong)
-                                Log.e("TAG", "setRecipesData: ${recipes.message}")
 
                             }
                         }
@@ -89,6 +88,11 @@ class RecipesByCategoryActivity : AppCompatActivity() {
     override fun onBackPressed() {
         super.onBackPressed()
         finish()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        fixInputMethod(applicationContext)
     }
 
     companion object {
