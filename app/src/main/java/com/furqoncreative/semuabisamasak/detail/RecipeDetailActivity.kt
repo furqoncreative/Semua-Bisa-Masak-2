@@ -1,7 +1,6 @@
 package com.furqoncreative.semuabisamasak.detail
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -10,6 +9,7 @@ import com.furqoncreative.core.data.Resource
 import com.furqoncreative.core.domain.model.recipes.Recipes
 import com.furqoncreative.semuabisamasak.R
 import com.furqoncreative.semuabisamasak.databinding.ActivityRecipeDetailBinding
+import com.furqoncreative.semuabisamasak.utils.fixInputMethod
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class RecipeDetailActivity : AppCompatActivity() {
@@ -52,17 +52,18 @@ class RecipeDetailActivity : AppCompatActivity() {
                                         tvRecipeName.text = recipe.title
                                         tvRecipeTime.text = recipe.times
                                         tvRecipePortion.text = recipe.servings
-                                        tvRecipeIngredients.text = recipe.ingredient?.joinToString("\n")
+                                        tvRecipeIngredients.text =
+                                            recipe.ingredient?.joinToString("\n")
                                         tvRecipeSteps.text = recipe.step?.joinToString()
                                         tvRecipePortion.text = recipe.servings
                                     }
                                     var statusFavorite = recipe.isFavorite
                                     statusFavorite?.let { it1 -> setStatusFavorite(it1) }
-                                        binding.cvFavorite.setOnClickListener {
-                                            statusFavorite = !statusFavorite!!
-                                            viewModel.setFavoriteRecipes(recipe, statusFavorite!!)
-                                            setStatusFavorite(statusFavorite!!)
-                                        }
+                                    binding.cvFavorite.setOnClickListener {
+                                        statusFavorite = !statusFavorite!!
+                                        viewModel.setFavoriteRecipes(recipe, statusFavorite!!)
+                                        setStatusFavorite(statusFavorite!!)
+                                    }
 
                                 }
                             }
@@ -71,8 +72,6 @@ class RecipeDetailActivity : AppCompatActivity() {
                                 binding.viewError.root.visibility = View.VISIBLE
                                 binding.viewError.tvError.text =
                                     resource.message ?: getString(R.string.something_wrong)
-                                Log.e("TAG", "setRecipesData: ${resource.message}")
-
                             }
                         }
                     }
@@ -104,6 +103,11 @@ class RecipeDetailActivity : AppCompatActivity() {
     override fun onBackPressed() {
         super.onBackPressed()
         finish()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        fixInputMethod(applicationContext)
     }
 
     companion object {

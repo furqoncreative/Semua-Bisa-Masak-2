@@ -2,10 +2,7 @@ package com.furqoncreative.semuabisamasak.bysearch
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.view.inputmethod.EditorInfo
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.furqoncreative.core.data.Resource
@@ -16,6 +13,7 @@ import com.furqoncreative.semuabisamasak.R
 import com.furqoncreative.semuabisamasak.bycategory.RecipesByCategoryActivity
 import com.furqoncreative.semuabisamasak.databinding.ActivityRecipesBySearchBinding
 import com.furqoncreative.semuabisamasak.detail.RecipeDetailActivity
+import com.furqoncreative.semuabisamasak.utils.fixInputMethod
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class RecipesBySearchActivity : AppCompatActivity() {
@@ -35,14 +33,6 @@ class RecipesBySearchActivity : AppCompatActivity() {
         }
         val data = intent.getStringExtra(RecipesByCategoryActivity.EXTRA_DATA)
         setRecipesData(data)
-
-//        binding.etSearch.setOnEditorActionListener(TextView.OnEditorActionListener { v, actionId, event ->
-//            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-//                setRecipesData(binding.etSearch.text.toString())
-//                return@OnEditorActionListener true
-//            }
-//            false
-//        })
 
         binding.ivSearch.setOnClickListener {
             setRecipesData(binding.etSearch.text.toString())
@@ -67,13 +57,12 @@ class RecipesBySearchActivity : AppCompatActivity() {
                         is Resource.Success -> {
                             binding.progressBar.visibility = View.GONE
                             val result = recipes.data?.let { it1 -> mapToRecipes(it1) }
-                            Log.d("TAG", "setRecipesData 1: $result")
-                            Log.d("TAG", "setRecipesData 2: ${recipes.data}")
 
                             if (!result.isNullOrEmpty()) {
                                 recipesAdapter.setData(result)
                             } else {
-                                binding.viewEmpty.tvEmpty.text = "$data : ${getString(R.string.text_no_result)}"
+                                binding.viewEmpty.tvEmpty.text =
+                                    "$data : ${getString(R.string.text_no_result)}"
                                 binding.viewEmpty.root.visibility = View.VISIBLE
                             }
                         }
@@ -82,7 +71,6 @@ class RecipesBySearchActivity : AppCompatActivity() {
                             binding.viewError.root.visibility = View.VISIBLE
                             binding.viewError.tvError.text =
                                 recipes.message ?: getString(R.string.something_wrong)
-                            Log.e("TAG", "setRecipesData: ${recipes.message}")
 
                         }
                     }
@@ -111,6 +99,11 @@ class RecipesBySearchActivity : AppCompatActivity() {
     override fun onBackPressed() {
         super.onBackPressed()
         finish()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        fixInputMethod(applicationContext)
     }
 
     companion object {
