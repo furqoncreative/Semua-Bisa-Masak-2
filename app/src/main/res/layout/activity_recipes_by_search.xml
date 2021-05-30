@@ -15,8 +15,8 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:visibility="gone"
         android:elevation="@dimen/large_dimen"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -55,10 +55,10 @@
         app:layout_constraintTop_toTopOf="@+id/cardView2">
 
         <ImageView
+            style="@style/Icon"
             android:layout_width="36dp"
             android:layout_height="36dp"
             android:layout_gravity="center"
-            style="@style/Icon"
             android:src="@drawable/ic_back" />
     </androidx.cardview.widget.CardView>
 
@@ -78,30 +78,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <EditText
-                android:id="@+id/et_search"
+            <SearchView
+                android:id="@+id/sv_search"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
-                android:hint="@string/text_search_hint"
-                android:inputType="textAutoComplete"
-                android:padding="@dimen/large_dimen"
-                android:imeOptions="actionSearch"
+                android:layout_marginTop="@dimen/small_dimen"
+                android:layout_marginBottom="@dimen/small_dimen"
+                android:iconifiedByDefault="false"
+                android:queryBackground="@android:color/transparent"
+                android:queryHint="@string/text_search_hint"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/iv_search"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:id="@+id/iv_search"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:src="@drawable/ic_search"
-                style="@style/Icon"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 

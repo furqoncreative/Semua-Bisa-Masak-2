@@ -5,8 +5,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.view.inputmethod.EditorInfo
-import android.widget.TextView.OnEditorActionListener
+import android.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.furqoncreative.core.data.Resource
@@ -33,21 +32,37 @@ class HomeActivity : AppCompatActivity() {
         setRecipesData()
         setRecipesCategoryData()
 
-        binding.etSearch.setOnEditorActionListener(OnEditorActionListener { v, actionId, event ->
-            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                val intent = Intent(this, RecipesBySearchActivity::class.java)
-                intent.putExtra(RecipesBySearchActivity.EXTRA_DATA, binding.etSearch.text.toString())
-                startActivity(intent)
-                return@OnEditorActionListener true
-            }
-            false
-        })
+//        binding.etSearch.setOnEditorActionListener(OnEditorActionListener { v, actionId, event ->
+//            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+//                val intent = Intent(this, RecipesBySearchActivity::class.java)
+//                intent.putExtra(RecipesBySearchActivity.EXTRA_DATA, binding.etSearch.text.toString())
+//                startActivity(intent)
+//                return@OnEditorActionListener true
+//            }
+//            false
+//        })
+//
+//        binding.ivSearch.setOnClickListener {
+//            val intent = Intent(this, RecipesBySearchActivity::class.java)
+//            intent.putExtra(RecipesBySearchActivity.EXTRA_DATA, binding.etSearch.text.toString())
+//            startActivity(intent)
+//        }
 
-        binding.ivSearch.setOnClickListener {
-            val intent = Intent(this, RecipesBySearchActivity::class.java)
-            intent.putExtra(RecipesBySearchActivity.EXTRA_DATA, binding.etSearch.text.toString())
-            startActivity(intent)
-        }
+        binding.svSearch.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                val intent = Intent(applicationContext, RecipesBySearchActivity::class.java)
+                intent.putExtra(
+                    RecipesBySearchActivity.EXTRA_DATA,
+                    query
+                )
+                startActivity(intent)
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return false
+            }
+        })
         binding.fabFavorite.setOnClickListener {
             val uri = Uri.parse("semuabisamasak://favorite")
             startActivity(Intent(Intent.ACTION_VIEW, uri))
