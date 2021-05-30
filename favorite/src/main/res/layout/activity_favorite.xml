@@ -24,7 +24,7 @@
 
     <include
         android:id="@+id/view_empty"
-        layout="@layout/view_empty"
+        layout="@layout/view_favorite_empty"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:visibility="gone"

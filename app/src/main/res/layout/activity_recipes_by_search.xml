@@ -15,8 +15,8 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:visibility="gone"
         android:elevation="@dimen/large_dimen"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -55,10 +55,10 @@
         app:layout_constraintTop_toTopOf="@+id/cardView2">
 
         <ImageView
+            style="@style/Icon"
             android:layout_width="36dp"
             android:layout_height="36dp"
             android:layout_gravity="center"
-            style="@style/Icon"
             android:src="@drawable/ic_back" />
     </androidx.cardview.widget.CardView>
 
@@ -82,11 +82,11 @@
                 android:id="@+id/et_search"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:autofillHints="@string/text_search_hint"
                 android:background="@android:color/transparent"
                 android:hint="@string/text_search_hint"
                 android:inputType="textAutoComplete"
                 android:padding="@dimen/large_dimen"
-                android:imeOptions="actionSearch"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/iv_search"
                 app:layout_constraintStart_toStartOf="parent"
@@ -94,11 +94,12 @@
 
             <ImageView
                 android:id="@+id/iv_search"
+                style="@style/Icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
+                android:contentDescription="@string/button_search"
                 android:src="@drawable/ic_search"
-                style="@style/Icon"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

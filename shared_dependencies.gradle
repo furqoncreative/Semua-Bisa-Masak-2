@@ -6,6 +6,7 @@ dependencies {
     androidTestImplementation "androidx.test.ext:junit:$androidx_junit_version"
     androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_version"
     implementation "androidx.multidex:multidex:$multidex_version"
+    debugImplementation "com.squareup.leakcanary:leakcanary-android:$leakcanary_version"
 
     implementation "androidx.cardview:cardview:$cardview_version"
     implementation "androidx.recyclerview:recyclerview:$recyclerview_version"
@@ -16,4 +17,5 @@ dependencies {
     implementation "io.insert-koin:koin-core:$koin_version"
     implementation "io.insert-koin:koin-android:$koin_version"
     implementation "io.insert-koin:koin-android-viewmodel:$koin_version"
+
 }

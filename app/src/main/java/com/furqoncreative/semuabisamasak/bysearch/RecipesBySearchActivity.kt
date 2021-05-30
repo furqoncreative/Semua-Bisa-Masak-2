@@ -36,13 +36,13 @@ class RecipesBySearchActivity : AppCompatActivity() {
         val data = intent.getStringExtra(RecipesByCategoryActivity.EXTRA_DATA)
         setRecipesData(data)
 
-        binding.etSearch.setOnEditorActionListener(TextView.OnEditorActionListener { v, actionId, event ->
-            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                setRecipesData(binding.etSearch.text.toString())
-                return@OnEditorActionListener true
-            }
-            false
-        })
+//        binding.etSearch.setOnEditorActionListener(TextView.OnEditorActionListener { v, actionId, event ->
+//            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+//                setRecipesData(binding.etSearch.text.toString())
+//                return@OnEditorActionListener true
+//            }
+//            false
+//        })
 
         binding.ivSearch.setOnClickListener {
             setRecipesData(binding.etSearch.text.toString())
