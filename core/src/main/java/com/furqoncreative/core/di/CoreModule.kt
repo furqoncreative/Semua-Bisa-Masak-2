@@ -15,6 +15,7 @@ import com.furqoncreative.core.domain.repository.recipescategory.IRecipesCategor
 import com.furqoncreative.core.utils.AppExecutors
 import net.sqlcipher.database.SQLiteDatabase
 import net.sqlcipher.database.SupportFactory
+import okhttp3.CertificatePinner
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidContext
@@ -50,10 +51,17 @@ val networkModule = module {
         } else {
             logging.setLevel(HttpLoggingInterceptor.Level.BASIC)
         }
+        val hostname = "masak-apa.tomorisakura.vercel.app"
+        val certificatePinner = CertificatePinner.Builder()
+            .add(hostname, "sha256/EK2RvZrro1OVooxKDZMGtPNZfV88eMgZB8DVpUFfxrw=")
+            .add(hostname, "sha256/jQJTbIh0grw0/1TkHSumWb+Fs0Ggogr621gT3PvPKG0=")
+            .add(hostname, "sha256/Vjs8r4z+80wjNcr1YKepWQboSIRi63WsWXhIMN+eWys=")
+            .build()
         OkHttpClient.Builder()
             .addInterceptor(logging)
             .connectTimeout(120, TimeUnit.SECONDS)
             .readTimeout(120, TimeUnit.SECONDS)
+            .certificatePinner(certificatePinner)
             .build()
     }
     single {
